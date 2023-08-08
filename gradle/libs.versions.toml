@@ -1,0 +1,33 @@
+[versions]
+kotlin-poet = "1.14.2"
+byte-buddy="1.14.5"
+autoService = "1.1.1"
+kotlinx-metadata = "0.7.0"
+ksp = "1.9.0-1.0.13"
+dokka = "1.8.20"
+kotlin = "1.9.0"
+spotless = "6.20.0"
+mavenPublish = "0.25.3"
+kotlinCompileTesting = "0.3.1"
+kotlinBinaryCompatibilityValidator = "0.13.2"
+[libraries]
+byte-buddy = { module = "net.bytebuddy:byte-buddy", version.ref = "byte-buddy" }
+kotlin-poet = { module = "com.squareup:kotlinpoet", version.ref = "kotlin-poet" }
+ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+ksp-processor = { module = "com.google.devtools.ksp:symbol-processing", version.ref = "ksp" }
+autoService = { module = "com.google.auto.service:auto-service-annotations", version.ref = "autoService" }
+autoService-ksp = "dev.zacsweers.autoservice:auto-service-ksp:1.1.0"
+kotlinpoet-metadata = { module = "com.squareup:kotlinpoet-metadata", version.ref = "kotlin-poet" }
+kotlinpoet-ksp = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlin-poet" }
+kotlinxMetadata = { module = "org.jetbrains.kotlinx:kotlinx-metadata-jvm", version.ref = "kotlinx-metadata" }
+# testing
+kotlinCompileTesting = { module = "dev.zacsweers.kctfork:core", version.ref = "kotlinCompileTesting" }
+kotlinCompileTesting-ksp = { module = "dev.zacsweers.kctfork:ksp", version.ref = "kotlinCompileTesting" }
+[plugins]
+
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
+kotlinBinaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinBinaryCompatibilityValidator" }
