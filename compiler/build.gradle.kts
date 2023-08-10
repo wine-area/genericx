@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+    compileOnly(libs.kotlin.complier.embeddable)
     implementation(libs.kotlin.poet)
     implementation(projects.core)
     implementation(libs.ksp.api)

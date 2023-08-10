@@ -1,6 +1,6 @@
 [versions]
 kotlin-poet = "1.14.2"
-byte-buddy="1.14.5"
+byte-buddy = "1.14.5"
 autoService = "1.1.1"
 kotlinx-metadata = "0.7.0"
 ksp = "1.9.0-1.0.13"
@@ -11,6 +11,7 @@ mavenPublish = "0.25.3"
 kotlinCompileTesting = "0.3.1"
 kotlinBinaryCompatibilityValidator = "0.13.2"
 [libraries]
+kotlin-complier-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin" }
 byte-buddy = { module = "net.bytebuddy:byte-buddy", version.ref = "byte-buddy" }
 kotlin-poet = { module = "com.squareup:kotlinpoet", version.ref = "kotlin-poet" }
 ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
