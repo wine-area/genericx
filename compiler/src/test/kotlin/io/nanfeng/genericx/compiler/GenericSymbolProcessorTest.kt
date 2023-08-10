@@ -1,50 +1,59 @@
 package io.nanfeng.genericx.compiler
 
 import com.tschuchort.compiletesting.KotlinCompilation
+import com.tschuchort.compiletesting.PluginOption
 import com.tschuchort.compiletesting.SourceFile
-import com.tschuchort.compiletesting.symbolProcessorProviders
-import io.nanfeng.genericx.core.GenericX
-import io.nanfeng.genericx.core.Pick
-import net.bytebuddy.ByteBuddy
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.jupiter.api.Test
 
 class GenericSymbolProcessorTest {
+
     @OptIn(ExperimentalCompilerApi::class)
     @Test
     fun `test pick`() {
         val kotlin = SourceFile.kotlin(
-            "TestPick.kt", """
-
-
-        """.trimIndent()
-        )
-
-        val compilation = KotlinCompilation().apply {
-            sources = listOf(kotlin)
-            symbolProcessorProviders = listOf(GenericSymbolProcessorProvider())
-            inheritClassPath = true
-            messageOutputStream = System.out
-        }
-        compilation.compile()
-    }
-
+            "TestPick.kt",
+            """
+import io.nanfeng.genericx.core.GenericX
+import io.nanfeng.genericx.core.Pick
     data class TestPick(
         val name: String,
         val age: Int,
         val address: String
     )
 
-    @GenericX
     class TestPick1 : Pick<TestPick>(TestPick::name, TestPick::age)
+    fun helloWorld() = Unit
+    fun helloWorld2(arg: Any) = arg
+    fun helloWorld3(arg: Int, arg2: Float) = arg2
+   
+  fun main() {
+ println(TestPick1::class)
+  }
+        """.trimIndent()
+        )
 
-    @Test
+        val compilation = KotlinCompilation().apply {
+            sources = listOf(kotlin)
+            compilerPluginRegistrars = listOf(GenericXCompilerPluginRegistrar())
+            commandLineProcessors = listOf(FPCommandLineProcessor())
+            this.pluginOptions = listOf(
+                PluginOption(
+                    pluginId = "io.nanfeng.genericx",
+                    optionName = "tag",
+                    optionValue = "GenericX"
+                )
+            )
 
-    fun `test required`() {
-        ByteBuddy()
-            .subclass(Pick::class.java)
-            .make()
-            .load(Pick::class.java.classLoader)
+            // 执行文件中的main函数
+
+            inheritClassPath = true
+        }
+        compilation.compile()
+
+
 
     }
+
+
 }
