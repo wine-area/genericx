@@ -16,7 +16,9 @@ class GenericSymbolProcessorTest {
             """
 import io.nanfeng.genericx.core.GenericX
 import io.nanfeng.genericx.core.Pick
+import org.jetbrains.annotations.NotNull
     data class TestPick(
+        @GenericX
         val name: String,
         val age: Int,
         val address: String

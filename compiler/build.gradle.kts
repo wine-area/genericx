@@ -12,11 +12,11 @@ repositories {
 }
 
 dependencies {
+    // kotlin lombok plugin
+    implementation("org.jetbrains.kotlin:kotlin-lombok:1.9.0")
     compileOnly(libs.kotlin.complier.embeddable)
-    implementation(libs.kotlin.poet)
     implementation(projects.core)
     implementation(libs.ksp.api)
-    implementation(libs.byte.buddy)
     implementation(libs.autoService)
     ksp(libs.autoService.ksp)
     testImplementation(libs.kotlinCompileTesting.ksp)

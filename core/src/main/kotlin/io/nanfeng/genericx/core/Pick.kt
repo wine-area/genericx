@@ -17,5 +17,5 @@ abstract class Partial<T>(vararg properties: KProperty1<T, Any?>) {
 
 
 @Retention(AnnotationRetention.RUNTIME)
-@Target(AnnotationTarget.CLASS)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FIELD)
 annotation class GenericX

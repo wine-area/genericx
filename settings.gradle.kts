@@ -4,9 +4,6 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
-    // configure for versioncatelog
-
-
 }
 
 plugins {
@@ -15,5 +12,6 @@ plugins {
 
 rootProject.name = "genericx"
 include("compiler")
-include("dependecies")
+include("dependencies")
 include("core")
+include("sample")
