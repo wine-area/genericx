@@ -17,6 +17,7 @@ dependencies {
     compileOnly(libs.kotlin.complier.embeddable)
     implementation(projects.core)
     implementation(libs.ksp.api)
+    implementation(libs.kotlin.poet)
     implementation(libs.autoService)
     ksp(libs.autoService.ksp)
     testImplementation(libs.kotlinCompileTesting.ksp)

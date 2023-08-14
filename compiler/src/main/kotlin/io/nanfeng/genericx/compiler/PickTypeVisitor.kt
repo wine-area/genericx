@@ -21,6 +21,7 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.util.constructedClass
 import org.jetbrains.kotlin.ir.util.constructors
+import org.jetbrains.kotlin.ir.util.dumpKotlinLike
 import org.jetbrains.kotlin.ir.util.statements
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
@@ -42,9 +43,13 @@ internal class PickTypeVisitor(
 
     @OptIn(ObsoleteDescriptorBasedAPI::class)
     override fun visitFile(declaration: IrFile) {
-        val irClassesWithPick = declaration
+        val filteredClasses = declaration
             .declarations
             .filterIsInstance<IrClass>()
+        logger.report(CompilerMessageSeverity.ERROR,
+            "before ir ${filteredClasses.map { it.dumpKotlinLike() }}"
+        )
+        val irClassesWithPick = filteredClasses
             .filter {
                 it.superTypes
                     .firstOrNull()
@@ -119,12 +124,19 @@ internal class PickTypeVisitor(
             logger.report(CompilerMessageSeverity.INFO, "add value parameter for  ${irProperty.name}")
         }
         // todo
+        val statements = declaration.body!!.statements
+
+        statements.first()
 //        declaration.body = irFactory.createBlockBody(
 //            startOffset = declaration.startOffset,
 //            endOffset = declaration.endOffset,
-//            statements = setFieldsStatements.toList()
+//            statements =
 //        )
-        logger.report(CompilerMessageSeverity.INFO, "irClass ${declaration.constructedClass} is transformed")
+
+        logger.report(
+            CompilerMessageSeverity.ERROR,
+            "irClassAfter ${declaration.constructedClass.dumpKotlinLike()} is transformed"
+        )
 
 
     }
